@@ -97,8 +97,8 @@ function calc_total()
                             <td>1</td>
                             <td> <select  name='product[]' id="vegitable"  class="form-control">
                             @foreach ($products as $product)
-                              <option id={{$row->id}} value={{$row->product_name}} class="vegitable custom-select">
-                                {{$row->product_name}}
+                              <option id={{$product->id}} value={{$product->name}} class="vegitable custom-select">
+                                {{$product->name}}
                               </option>
                              @endforeach
                            </select></td>
