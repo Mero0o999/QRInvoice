@@ -28,4 +28,6 @@ Route::group(['middleware' => 'auth'], function() {
 
 });
 Route::resource('products', ProductController::class);
+Route::get('/getPrice/{id}', [ProductController::class,'getPrice']); // for get price list
+
 

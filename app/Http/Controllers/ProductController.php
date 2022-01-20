@@ -24,6 +24,12 @@
           return view('dashboard',compact('products'))
               ->with('i', (request()->input('page', 1) - 1) * 5);
       }
+      public function getPrice()
+      {
+         $getPrice = $_GET['id'];
+         $price  = DB::table('products')->where('id', $getPrice)->get();
+         return Response::json($price);
+      }
        
       /**
        * Show the form for creating a new resource.
