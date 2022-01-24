@@ -36,6 +36,7 @@
         // });
 
         $("#tab_logic").on('change', "select[id^='product']", function() {
+           // calc();
 
             var $row = $(this).closest("tr");
             $row.find("input[id^='price']").val($(this).find('option:selected').data("price"));
@@ -56,7 +57,7 @@
             }
             calc();
         });
-        $('#tab_logic tbody').on('keyup change', function() {
+        $('#qty').on('keyup change', function() {
             calc();
         });
         $('#tax').on('keyup change', function() {
