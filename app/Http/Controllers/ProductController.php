@@ -3,10 +3,54 @@
   namespace App\Http\Controllers;
      
   use App\Models\Product;
+  use App\Exports\ProductExport;
+  use App\Imports\ProductImport;
+
+
+
   use Illuminate\Http\Request;
+  use Maatwebsite\Excel\Facades\Excel;
+
     
   class ProductController extends Controller
   {
+
+
+      /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function importExportView()
+    {
+       return view('products.index');
+    }
+     
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function export() 
+    {
+        return Excel::download(new ProductExport, 'products.xlsx');
+    }
+     
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        Excel::import(new ProductImport,request()->file('file'));
+             
+        return back();
+    }
+    public function findPrice(Request $request){
+	
+		//it will get price if its id match with product id
+		$p=Product::select('price')->where('id',$request->id)->first();
+		
+    	return response()->json($p);
+	}
+
+
+
       /**
        * Display a listing of the resource.
        *
@@ -20,17 +64,18 @@
       }
       public function index1()
       {
-          $products = Product::latest()->paginate(5);
-          return view('dashboard',compact('products'))
-              ->with('i', (request()->input('page', 1) - 1) * 5);
+          $products = Product::All();
+          return view('dashboard',compact('products'));
+            //   ->with('i', (request()->input('page', 1) - 1) * 5);
       }
-      public function getPrice()
-      {
-         $getPrice = $_GET['id'];
-         $price  = DB::table('products')->where('id', $getPrice)->get();
-         return Response::json($price);
-      }
-       
+    //   public function findPrice(Request $request){
+	
+	// 	//it will get price if its id match with product id
+	// 	$p=Product::select('price')->where('id',$request->id)->first();
+		
+    // 	return response()->json($p);
+	// }
+
       /**
        * Show the form for creating a new resource.
        *

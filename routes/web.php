@@ -25,9 +25,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('dashboard', [ProductController::class,'index1'])->name('dashboard');
+    Route::resource('products', ProductController::class);
+// Route::get('/getPrice/{id}', [ProductController::class,'getPrice']); // for get price list
+// Route::get('/findPrice', [ProductController::class,'findPrice']); // for get price list
+Route::get('export', [ProductController::class, 'export'])->name('export');
+Route::post('import', [ProductController::class, 'import'])->name('import');
+Route::get('products.index', [ProductController::class, 'importExportView']);
 
 });
-Route::resource('products', ProductController::class);
-Route::get('/getPrice/{id}', [ProductController::class,'getPrice']); // for get price list
+
+
 
 
