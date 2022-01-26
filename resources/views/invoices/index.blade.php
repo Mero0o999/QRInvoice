@@ -1,14 +1,14 @@
-@extends('products.layout')
+@extends('invoices.layout')
  
 @section('content')
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Products</h2>
+                <h2>Invoices</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('invoices.create') }}"> Create New Invoice</a>
             </div>
         </div>
     </div>
@@ -23,8 +23,8 @@
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import User Data</button>
-                <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a>
+                <button class="btn btn-success">Import Invoice Data</button>
+                <a class="btn btn-warning" href="{{ route('export') }}">Export Invoice Data</a>
             </form>
         </div>
     <table class="table table-bordered">
@@ -34,17 +34,17 @@
             <th>Price</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($products as $product)
+        @foreach ($invoices as $product)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->price }}</td>
             <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                <form action="{{ route('invoices.destroy',$product->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('invoices.show',$product->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('invoices.edit',$product->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
@@ -56,6 +56,6 @@
         @endforeach
     </table>
   
-    {!! $products->links() !!}
+    {!! $invoices->links() !!}
       
 @endsection

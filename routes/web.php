@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\InvoiceController;
 
 
 /*
@@ -26,6 +27,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('dashboard', [ProductController::class,'index1'])->name('dashboard');
     Route::resource('products', ProductController::class);
+    Route::resource('invoices', InvoiceController::class);
+
 // Route::get('/getPrice/{id}', [ProductController::class,'getPrice']); // for get price list
 // Route::get('/findPrice', [ProductController::class,'findPrice']); // for get price list
 Route::get('export', [ProductController::class, 'export'])->name('export');

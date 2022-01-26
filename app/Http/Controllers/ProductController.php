@@ -49,6 +49,12 @@
     	return response()->json($p);
 	}
 
+    public function index1()
+    {
+        $products = Product::All();
+        return view('dashboard',compact('products'));
+          //   ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
 
 
       /**
@@ -62,19 +68,6 @@
           return view('products.index',compact('products'))
               ->with('i', (request()->input('page', 1) - 1) * 5);
       }
-      public function index1()
-      {
-          $products = Product::All();
-          return view('dashboard',compact('products'));
-            //   ->with('i', (request()->input('page', 1) - 1) * 5);
-      }
-    //   public function findPrice(Request $request){
-	
-	// 	//it will get price if its id match with product id
-	// 	$p=Product::select('price')->where('id',$request->id)->first();
-		
-    // 	return response()->json($p);
-	// }
 
       /**
        * Show the form for creating a new resource.

@@ -29,6 +29,8 @@
   
 
     <script>
+                 window.onload =calc();
+
     $(document).ready(function() {
 
         // $('select').selectize({
@@ -57,7 +59,7 @@
             }
             calc();
         });
-        $('#qty').on('keyup change', function() {
+        $('#tab_logic tbody').on('keyup change', function() {
             calc();
         });
         $('#tax').on('keyup change', function() {
